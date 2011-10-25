@@ -1,0 +1,38 @@
+
+This code is related to:
+
+B. J. Culpepper and B. A. Olshausen, "Learning transport operators for
+image manifolds", NIPS 2009.
+
+and my thesis:
+
+B. J. Culpepper. "Learned factorization models to Explain Variability in
+Natural Image Sequences", UC Berkeley EECS Ph.D. 2011.
+
+http://www.eecs.berkeley.edu/Pubs/TechRpts/2011/EECS-2011-61.html
+
+The code implements a MAP-EM algorithm to learn a basis for exponential
+operators that can be used to "explain" image sequences in terms of pixel
+transformations. Another way to think of it is as sparse coding for image
+transformations.
+
+The energy function is:
+
+E = 0.5 * \sum_{lt} | x_l(t) - \expm( \sum_j \psi_{jlm} c_j ) x_m(t-1) |^2 +
+    \lambda \sum_j | c_j |
+
+For a given psi, the solution to
+
+\arg \min_{c_j} E
+
+fits an infinite order polynomial through two data points x(t) and x(t-1).
+This polynomial is generated from the basis psi, so the problem is not
+hopelessly under-constrained.
+
+(I hope to expand on this README later!)
+
+The code depends on lbfgsb-stewart (also available in my github repo), and
+the availability of some movie data.
+
+--bjc 2011-10-24
+
